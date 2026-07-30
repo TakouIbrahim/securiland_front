@@ -1,0 +1,39 @@
+<div class="sl-page">
+  <div class="sl-page__header">
+    <h1>Paiements</h1>
+    <p>Historique de vos paiements (audits, abonnements, mises en avant).</p>
+  </div>
+
+  @if (loading()) {
+    <p class="sl-page__loading">Chargement…</p>
+  } @else if (payments().length === 0) {
+    <sl-empty-state
+      icon="account_balance_wallet"
+      title="Aucun paiement pour le moment"
+      description="Vos paiements liés aux audits fonciers, abonnements et mises en avant s'afficheront ici."
+    ></sl-empty-state>
+  } @else {
+    <div class="sl-pay-table sl-card-surface">
+      <table>
+        <thead>
+          <tr>
+            <th>Objet</th>
+            <th>Montant</th>
+            <th>Moyen</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of payments(); track p.id) {
+            <tr>
+              <td>{{ label(p) }}</td>
+              <td>{{ formatAmount(p.amount, p.currency) }}</td>
+              <td>{{ p.provider }}</td>
+              <td><sl-status-badge [status]="p.status"></sl-status-badge></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

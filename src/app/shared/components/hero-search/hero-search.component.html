@@ -1,0 +1,74 @@
+<section class="sl-hero">
+  <div class="sl-hero__bg">
+    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&q=70&auto=format&fit=crop" alt="" />
+    <div class="sl-hero__overlay"></div>
+  </div>
+
+  <div class="sl-container sl-hero__content">
+    <span class="sl-hero__eyebrow"><mat-icon>verified_user</mat-icon> Terrains vérifiés par SecuriLand</span>
+    <h1>Trouvez le terrain idéal,<br />vérifié et sécurisé.</h1>
+    <p>Des terrains audités, certifiés et accessibles dans les meilleures localités du Cameroun.</p>
+
+    <div class="sl-hero__search">
+      <div class="sl-hero__field">
+        <label>Ville ou quartier</label>
+        <div class="sl-hero__input">
+          <mat-icon>place</mat-icon>
+          <input type="text" placeholder="Ex : Douala, PK12" [(ngModel)]="filters.city" name="city" />
+        </div>
+      </div>
+
+      <span class="sl-hero__divider"></span>
+
+      <div class="sl-hero__field">
+        <label>Type de terrain</label>
+        <div class="sl-hero__input">
+          <mat-icon>category</mat-icon>
+          <select [(ngModel)]="filters.titleType" name="titleType">
+            <option value="">Tous types</option>
+            <option value="Résidentiel">Résidentiel</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Agricole">Agricole</option>
+          </select>
+        </div>
+      </div>
+
+      <span class="sl-hero__divider"></span>
+
+      <div class="sl-hero__field">
+        <label>Superficie min</label>
+        <div class="sl-hero__input">
+          <mat-icon>straighten</mat-icon>
+          <input type="number" placeholder="m²" [(ngModel)]="filters.minSurface" name="minSurface" />
+        </div>
+      </div>
+
+      <span class="sl-hero__divider"></span>
+
+      <div class="sl-hero__field">
+        <label>Prix max</label>
+        <div class="sl-hero__input">
+          <mat-icon>payments</mat-icon>
+          <input type="number" placeholder="FCFA" [(ngModel)]="filters.maxPrice" name="maxPrice" />
+        </div>
+      </div>
+
+      <button mat-flat-button color="primary" class="sl-hero__submit" (click)="onSearch()">
+        <mat-icon>search</mat-icon> Rechercher
+      </button>
+    </div>
+
+    <div class="sl-hero__tags">
+      @for (tag of quickTags; track tag) {
+        <button
+          type="button"
+          class="sl-hero__tag"
+          [class.is-active]="activeTag === tag"
+          (click)="selectTag(tag)"
+        >
+          {{ tag }}
+        </button>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,64 @@
+<div class="sl-page">
+  <div class="sl-page__header">
+    <h1>Publier un terrain</h1>
+    <p>Renseignez les informations de votre annonce. Elle sera vérifiée par notre équipe avant publication.</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="sl-publish-form sl-card-surface">
+    <mat-form-field appearance="outline">
+      <mat-label>Titre de l'annonce</mat-label>
+      <input matInput formControlName="title" placeholder="Ex : Terrain 500 m² à Douala" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput rows="4" formControlName="description" placeholder="Décrivez le terrain : accès, environnement, atouts…"></textarea>
+    </mat-form-field>
+
+    <div class="sl-publish-form__row">
+      <mat-form-field appearance="outline">
+        <mat-label>Prix (FCFA)</mat-label>
+        <input matInput type="number" formControlName="price" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Superficie (m²)</mat-label>
+        <input matInput type="number" formControlName="surfaceArea" />
+      </mat-form-field>
+    </div>
+
+    <div class="sl-publish-form__row">
+      <mat-form-field appearance="outline">
+        <mat-label>Ville</mat-label>
+        <input matInput formControlName="city" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Quartier</mat-label>
+        <input matInput formControlName="district" />
+      </mat-form-field>
+    </div>
+
+    <div class="sl-publish-form__row">
+      <mat-form-field appearance="outline">
+        <mat-label>Latitude</mat-label>
+        <input matInput type="number" formControlName="latitude" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Longitude</mat-label>
+        <input matInput type="number" formControlName="longitude" />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Type de titre</mat-label>
+      <mat-select formControlName="titleType">
+        <mat-option value="Résidentiel">Résidentiel</mat-option>
+        <mat-option value="Commercial">Commercial</mat-option>
+        <mat-option value="Agricole">Agricole</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" type="submit" class="sl-publish-form__submit" [disabled]="submitting()">
+      {{ submitting() ? 'Envoi…' : 'Soumettre pour modération' }}
+    </button>
+  </form>
+</div>

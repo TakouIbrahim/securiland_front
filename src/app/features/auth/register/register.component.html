@@ -1,0 +1,64 @@
+<section class="sl-auth">
+  <div class="sl-auth__card">
+    <a routerLink="/" class="sl-auth__logo">
+      <span class="sl-auth__logo-icon"><mat-icon>home_work</mat-icon></span>
+      Securi<strong>Land</strong>
+    </a>
+
+    <h1>Créer votre compte</h1>
+    <p class="sl-auth__subtitle">Rejoignez SecuriLand pour acheter, vendre ou faire auditer un terrain en toute confiance.</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="sl-auth__form">
+      <div class="sl-auth__row">
+        <mat-form-field appearance="outline">
+          <mat-label>Prénom</mat-label>
+          <input matInput formControlName="firstName" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Nom</mat-label>
+          <input matInput formControlName="lastName" />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Adresse email</mat-label>
+        <input matInput type="email" formControlName="email" autocomplete="email" />
+        <mat-icon matPrefix class="sl-auth__field-icon">mail</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Téléphone (optionnel)</mat-label>
+        <input matInput formControlName="phone" placeholder="+237 6XX XX XX XX" />
+        <mat-icon matPrefix class="sl-auth__field-icon">call</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput [type]="hidePassword() ? 'password' : 'text'" formControlName="password" autocomplete="new-password" />
+        <mat-icon matPrefix class="sl-auth__field-icon">lock</mat-icon>
+        <button mat-icon-button matSuffix type="button" (click)="hidePassword.set(!hidePassword())">
+          <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        @if (form.controls.password.hasError('minlength') && form.controls.password.touched) {
+          <mat-error>8 caractères minimum.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-checkbox formControlName="acceptTerms" color="primary">
+        J'accepte les <a href="#">conditions d'utilisation</a> de SecuriLand
+      </mat-checkbox>
+
+      @if (errorMessage()) {
+        <div class="sl-auth__error">{{ errorMessage() }}</div>
+      }
+
+      <button mat-flat-button color="primary" type="submit" class="sl-auth__submit" [disabled]="submitting()">
+        {{ submitting() ? 'Création…' : 'Créer mon compte' }}
+      </button>
+    </form>
+
+    <p class="sl-auth__switch">
+      Déjà inscrit ? <a routerLink="/connexion">Se connecter</a>
+    </p>
+  </div>
+</section>

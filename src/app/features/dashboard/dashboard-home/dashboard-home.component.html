@@ -1,0 +1,61 @@
+<div class="sl-dash">
+  <div class="sl-dash__header">
+    <div>
+      <h1>Bonjour 👋</h1>
+      <p>{{ auth.currentEmail() }} — voici un aperçu de votre activité SecuriLand.</p>
+    </div>
+    <a routerLink="/app/publier" class="sl-btn-gold sl-dash__cta">
+      Publier un terrain
+    </a>
+  </div>
+
+  <div class="sl-dash__stats">
+    @for (stat of stats(); track stat.label) {
+      <a [routerLink]="stat.link" class="sl-dash__stat sl-card-surface">
+        <div class="sl-dash__stat-icon"><mat-icon>{{ stat.icon }}</mat-icon></div>
+        <div>
+          <span class="sl-dash__stat-value">{{ stat.value }}</span>
+          <span class="sl-dash__stat-label">{{ stat.label }}</span>
+        </div>
+      </a>
+    }
+  </div>
+
+  <div class="sl-dash__section sl-card-surface">
+    <div class="sl-dash__section-header">
+      <h2>Mes dernières demandes d'audit</h2>
+      <a routerLink="/app/demandes">Voir tout <mat-icon>arrow_forward</mat-icon></a>
+    </div>
+
+    @if (loading()) {
+      <p class="sl-dash__loading">Chargement…</p>
+    } @else if (recentRequests().length === 0) {
+      <sl-empty-state
+        icon="fact_check"
+        title="Aucune demande d'audit pour le moment"
+        description="Faites vérifier un terrain avant tout achat pour sécuriser votre transaction."
+        ctaLabel="Faire une demande d'audit"
+        ctaLink="/terrains"
+      ></sl-empty-state>
+    } @else {
+      <table class="sl-dash__table">
+        <thead>
+          <tr>
+            <th>Numéro de titre</th>
+            <th>Ville</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (r of recentRequests(); track r.id) {
+            <tr>
+              <td>{{ r.titleNumber }}</td>
+              <td>{{ r.landCity }}</td>
+              <td><sl-status-badge [status]="r.status"></sl-status-badge></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+</div>

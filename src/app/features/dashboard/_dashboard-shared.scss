@@ -1,0 +1,37 @@
+.sl-page__header {
+  margin-bottom: 24px;
+}
+
+.sl-page__header h1 {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.sl-page__header p {
+  color: var(--sl-ink-soft);
+  font-size: 14px;
+}
+
+.sl-page__loading {
+  padding: 60px 0;
+  text-align: center;
+  color: var(--sl-gray-500);
+}
+
+.sl-page__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .sl-page__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .sl-page__grid {
+    grid-template-columns: 1fr;
+  }
+}

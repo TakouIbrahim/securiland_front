@@ -1,0 +1,45 @@
+<aside class="sl-sidebar">
+  <div class="sl-sidebar__top">
+    <a routerLink="/" class="sl-sidebar__logo">
+      <span class="sl-sidebar__logo-icon"><mat-icon>home_work</mat-icon></span>
+      <span>Securi<strong>Land</strong></span>
+    </a>
+
+    <div class="sl-sidebar__user">
+      <div class="sl-sidebar__avatar">{{ initials }}</div>
+      <div>
+        <span class="sl-sidebar__welcome">Bienvenue,</span>
+        <span class="sl-sidebar__name">{{ auth.currentEmail() }}</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="sl-sidebar__nav">
+    @for (item of navItems; track item.link) {
+      <a
+        [routerLink]="item.link"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+        (click)="closeMobile.emit()"
+      >
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span>{{ item.label }}</span>
+        @if (item.label === 'Messages' && unreadCount() > 0) {
+          <span class="sl-sidebar__badge">{{ unreadCount() }}</span>
+        }
+      </a>
+    }
+
+    <button type="button" class="sl-sidebar__logout" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Déconnexion</span>
+    </button>
+  </nav>
+
+  <div class="sl-sidebar__promo">
+    <p>Publiez votre terrain et atteignez des milliers d'acheteurs vérifiés.</p>
+    <a mat-flat-button routerLink="/app/publier" class="sl-btn-gold sl-sidebar__promo-btn">
+      Publier maintenant
+    </a>
+  </div>
+</aside>

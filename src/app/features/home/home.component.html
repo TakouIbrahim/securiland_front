@@ -1,0 +1,45 @@
+<sl-hero-search></sl-hero-search>
+
+<section class="sl-section sl-container">
+  <div class="sl-section__header">
+    <h2>Terrains populaires</h2>
+    <a routerLink="/terrains" class="sl-section__link">
+      Voir tous <mat-icon>arrow_forward</mat-icon>
+    </a>
+  </div>
+
+  <div class="sl-grid">
+    @for (listing of listings(); track listing.id) {
+      <sl-listing-card [listing]="listing"></sl-listing-card>
+    }
+  </div>
+</section>
+
+<section class="sl-section sl-why" id="pourquoi">
+  <div class="sl-container">
+    <div class="sl-section__header sl-section__header--center">
+      <h2>Pourquoi nous choisir ?</h2>
+      <p>Une méthode rigoureuse pensée pour sécuriser chaque étape de votre projet foncier.</p>
+    </div>
+
+    <div class="sl-why__grid">
+      @for (feature of features; track feature.title) {
+        <div class="sl-why__item">
+          <div class="sl-why__icon"><mat-icon>{{ feature.icon }}</mat-icon></div>
+          <h3>{{ feature.title }}</h3>
+          <p>{{ feature.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="sl-cta">
+  <div class="sl-container sl-cta__inner">
+    <div>
+      <h2>Vous avez un terrain à vendre ?</h2>
+      <p>Publiez votre annonce et atteignez des milliers d'acheteurs vérifiés partout au Cameroun et dans la diaspora.</p>
+    </div>
+    <a routerLink="/inscription" class="sl-btn-gold sl-cta__btn">Publier une annonce</a>
+  </div>
+</section>

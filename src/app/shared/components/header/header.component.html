@@ -1,0 +1,64 @@
+<header class="sl-header" [class.sl-header--scrolled]="scrolled()">
+  <div class="sl-container sl-header__inner">
+    <a routerLink="/" class="sl-header__logo">
+      <span class="sl-header__logo-icon">
+        <mat-icon>home_work</mat-icon>
+      </span>
+      <span class="sl-header__logo-text">Securi<strong>Land</strong></span>
+    </a>
+
+    <nav class="sl-header__nav">
+      <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">Accueil</a>
+      <a routerLink="/terrains" routerLinkActive="is-active">Terrains</a>
+      <a routerLink="/terrains" [queryParams]="{ audit: '1' }">Audit foncier</a>
+      <a href="#pourquoi">À propos</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="sl-header__actions">
+      <button mat-icon-button aria-label="Favoris" class="sl-header__icon-btn" [routerLink]="auth.isAuthenticated() ? '/app/favoris' : '/connexion'">
+        <mat-icon>favorite_border</mat-icon>
+      </button>
+
+      @if (!auth.isAuthenticated()) {
+        <a mat-stroked-button routerLink="/connexion" class="sl-header__login">Se connecter</a>
+        <a mat-flat-button color="primary" routerLink="/inscription" class="sl-header__signup">S'inscrire</a>
+      } @else {
+        <button mat-icon-button [matMenuTriggerFor]="userMenu" class="sl-header__avatar" aria-label="Menu utilisateur">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <a mat-menu-item routerLink="/app/tableau-de-bord">
+            <mat-icon>dashboard</mat-icon><span>Tableau de bord</span>
+          </a>
+          <a mat-menu-item routerLink="/app/profil">
+            <mat-icon>person</mat-icon><span>Mon profil</span>
+          </a>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon><span>Déconnexion</span>
+          </button>
+        </mat-menu>
+      }
+
+      <button class="sl-header__burger" (click)="toggleMenu()" aria-label="Menu">
+        <mat-icon>{{ menuOpen() ? 'close' : 'menu' }}</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  @if (menuOpen()) {
+    <nav class="sl-header__mobile-nav">
+      <a routerLink="/" (click)="toggleMenu()">Accueil</a>
+      <a routerLink="/terrains" (click)="toggleMenu()">Terrains</a>
+      <a href="#pourquoi" (click)="toggleMenu()">À propos</a>
+      <a href="#contact" (click)="toggleMenu()">Contact</a>
+      <hr />
+      @if (!auth.isAuthenticated()) {
+        <a routerLink="/connexion" (click)="toggleMenu()">Se connecter</a>
+        <a routerLink="/inscription" (click)="toggleMenu()" class="is-cta">S'inscrire</a>
+      } @else {
+        <a routerLink="/app/tableau-de-bord" (click)="toggleMenu()">Tableau de bord</a>
+      }
+    </nav>
+  }
+</header>

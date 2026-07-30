@@ -1,0 +1,29 @@
+<div class="sl-page">
+  <div class="sl-page__header">
+    <h1>Messages</h1>
+    <p>Échangez directement et en toute sécurité avec les vendeurs et acheteurs intéressés.</p>
+  </div>
+
+  @if (listingIdFromQuery()) {
+    <div class="sl-msg-notice sl-card-surface">
+      <mat-icon>chat_bubble</mat-icon>
+      <span>Nouvelle conversation liée à l'annonce {{ listingIdFromQuery() }} — écrivez votre premier message ci-dessous.</span>
+    </div>
+    <div class="sl-msg-compose sl-card-surface">
+      <textarea [(ngModel)]="draft" rows="3" placeholder="Bonjour, je suis intéressé(e) par votre terrain…"></textarea>
+      <button class="sl-btn-gold sl-msg-compose__send">Envoyer</button>
+    </div>
+  }
+
+  @if (loading()) {
+    <p class="sl-page__loading">Chargement…</p>
+  } @else if (threads().length === 0) {
+    <sl-empty-state
+      icon="chat_bubble_outline"
+      title="Aucun message pour le moment"
+      description="Contactez un vendeur depuis la fiche d'un terrain pour démarrer une conversation."
+      ctaLabel="Parcourir les terrains"
+      ctaLink="/terrains"
+    ></sl-empty-state>
+  }
+</div>

@@ -1,0 +1,27 @@
+<div class="sl-app-shell">
+  <div class="sl-app-shell__sidebar sl-app-shell__sidebar--desktop">
+    <sl-sidebar-nav></sl-sidebar-nav>
+  </div>
+
+  @if (mobileOpen()) {
+    <div class="sl-app-shell__scrim" (click)="closeMobile()"></div>
+    <div class="sl-app-shell__sidebar sl-app-shell__sidebar--mobile">
+      <sl-sidebar-nav (closeMobile)="closeMobile()"></sl-sidebar-nav>
+    </div>
+  }
+
+  <div class="sl-app-shell__main">
+    <header class="sl-app-shell__topbar">
+      <button class="sl-app-shell__burger" (click)="toggleMobile()" aria-label="Ouvrir le menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <a routerLink="/" class="sl-app-shell__back">
+        <mat-icon>arrow_back</mat-icon> Retour au site
+      </a>
+    </header>
+
+    <main class="sl-app-shell__content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<a class="sl-card" [routerLink]="['/terrains', listing.id]">
+  <div class="sl-card__media">
+    <img [src]="listing.imageUrl || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=70&auto=format&fit=crop'" [alt]="listing.title" loading="lazy" />
+
+    @if (listing.certificationStatus === 'CERTIFIEE') {
+      <span class="sl-badge-titre sl-card__badge">
+        <mat-icon>verified</mat-icon> Titré
+      </span>
+    }
+
+    <button class="sl-card__fav" (click)="onFavoriteClick($event)" [class.is-active]="favorited" aria-label="Ajouter aux favoris">
+      <mat-icon>{{ favorited ? 'favorite' : 'favorite_border' }}</mat-icon>
+    </button>
+
+    @if (listing.boosted) {
+      <span class="sl-card__boost">
+        <mat-icon>bolt</mat-icon> Sponsorisé
+      </span>
+    }
+  </div>
+
+  <div class="sl-card__body">
+    <h3 class="sl-card__title">{{ listing.title }}</h3>
+    <div class="sl-card__location">
+      <mat-icon>place</mat-icon>
+      <span>{{ listing.district }}, {{ listing.city }}</span>
+    </div>
+
+    <div class="sl-card__price">{{ formatPrice(listing.price) }} FCFA</div>
+
+    <div class="sl-card__specs">
+      <span><mat-icon>straighten</mat-icon> {{ listing.surfaceArea ?? '—' }} m²</span>
+      <span><mat-icon>home_work</mat-icon> {{ listing.titleType }}</span>
+    </div>
+  </div>
+</a>

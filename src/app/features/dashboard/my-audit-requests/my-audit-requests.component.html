@@ -1,0 +1,51 @@
+<div class="sl-page">
+  <div class="sl-page__header sl-page__header--row">
+    <div>
+      <h1>Mes demandes d'audit</h1>
+      <p>Suivez l'avancement de vos dossiers de vérification foncière.</p>
+    </div>
+    <a routerLink="/terrains" mat-flat-button color="primary">
+      <mat-icon>add</mat-icon> Nouvelle demande
+    </a>
+  </div>
+
+  @if (loading()) {
+    <p class="sl-page__loading">Chargement…</p>
+  } @else if (requests().length === 0) {
+    <sl-empty-state
+      icon="fact_check"
+      title="Aucune demande d'audit"
+      description="Sécurisez votre achat en demandant une vérification complète du terrain avant de vous engager."
+      ctaLabel="Parcourir les terrains"
+      ctaLink="/terrains"
+    ></sl-empty-state>
+  } @else {
+    <div class="sl-req-list">
+      @for (r of requests(); track r.id) {
+        <div class="sl-req-card sl-card-surface">
+          <div class="sl-req-card__main">
+            <div class="sl-req-card__title-row">
+              <h3>Titre n° {{ r.titleNumber }}</h3>
+              <sl-status-badge [status]="r.status"></sl-status-badge>
+            </div>
+            <p class="sl-req-card__meta">
+              <mat-icon>place</mat-icon> {{ r.landDistrict }}, {{ r.landCity }}
+            </p>
+            <p class="sl-req-card__meta">
+              <mat-icon>person</mat-icon> Propriétaire déclaré : {{ r.ownerName }}
+            </p>
+            @if (r.status === 'EN_ATTENTE_COMPLEMENT' && r.complementReason) {
+              <div class="sl-req-card__alert">
+                <mat-icon>info</mat-icon> Complément demandé : {{ r.complementReason }}
+              </div>
+            }
+          </div>
+
+          @if (!['CLOTURE', 'ANNULE'].includes(r.status)) {
+            <button mat-button class="sl-req-card__cancel" (click)="cancel(r)">Annuler</button>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

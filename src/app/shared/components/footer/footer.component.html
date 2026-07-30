@@ -1,0 +1,50 @@
+<footer class="sl-footer" id="contact">
+  <div class="sl-container sl-footer__grid">
+    <div class="sl-footer__brand">
+      <div class="sl-footer__logo">
+        <mat-icon>home_work</mat-icon>
+        <span>Securi<strong>Land</strong></span>
+      </div>
+      <p>
+        La marketplace foncière qui sécurise chaque transaction au Cameroun : audit terrain,
+        certification, et mise en relation directe entre acheteurs et vendeurs vérifiés.
+      </p>
+      <div class="sl-footer__social">
+        <a href="#" aria-label="Facebook"><mat-icon>facebook</mat-icon></a>
+        <a href="#" aria-label="WhatsApp"><mat-icon>chat</mat-icon></a>
+        <a href="#" aria-label="LinkedIn"><mat-icon>business_center</mat-icon></a>
+      </div>
+    </div>
+
+    <div class="sl-footer__col">
+      <h4>Plateforme</h4>
+      <a routerLink="/terrains">Terrains à vendre</a>
+      <a routerLink="/terrains" [queryParams]="{ audit: '1' }">Demander un audit</a>
+      <a routerLink="/app/publier">Publier une annonce</a>
+      <a href="#pourquoi">Pourquoi SecuriLand</a>
+    </div>
+
+    <div class="sl-footer__col">
+      <h4>Ressources</h4>
+      <a href="#">Guide de l'acheteur</a>
+      <a href="#">Guide du vendeur</a>
+      <a href="#">Annuaire des notaires</a>
+      <a href="#">Blog foncier</a>
+    </div>
+
+    <div class="sl-footer__col">
+      <h4>Contact</h4>
+      <p><mat-icon>place</mat-icon> Bonanjo, Douala — Cameroun</p>
+      <p><mat-icon>call</mat-icon> +237 6 75 12 34 56</p>
+      <p><mat-icon>mail</mat-icon> contact&#64;securiland.cm</p>
+    </div>
+  </div>
+
+  <div class="sl-container sl-footer__bottom">
+    <span>&copy; {{ year }} SecuriLand Cameroun. Tous droits réservés.</span>
+    <div class="sl-footer__legal">
+      <a href="#">Confidentialité</a>
+      <a href="#">Conditions d'utilisation</a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,48 @@
+<div class="sl-page">
+  <div class="sl-page__header">
+    <h1>Paramètres</h1>
+    <p>Gérez vos préférences de notification et de sécurité.</p>
+  </div>
+
+  <div class="sl-settings-card sl-card-surface">
+    <h3>Notifications</h3>
+
+    <div class="sl-settings-row">
+      <div>
+        <span class="sl-settings-row__title">Notifications par email</span>
+        <span class="sl-settings-row__desc">Confirmations de paiement, statut de vos dossiers d'audit, nouveaux messages.</span>
+      </div>
+      <mat-slide-toggle [checked]="emailNotifications()" (change)="emailNotifications.set($event.checked)" color="primary"></mat-slide-toggle>
+    </div>
+
+    <div class="sl-settings-row">
+      <div>
+        <span class="sl-settings-row__title">Notifications par SMS</span>
+        <span class="sl-settings-row__desc">Alertes importantes envoyées directement sur votre téléphone.</span>
+      </div>
+      <mat-slide-toggle [checked]="smsNotifications()" (change)="smsNotifications.set($event.checked)" color="primary"></mat-slide-toggle>
+    </div>
+  </div>
+
+  <div class="sl-settings-card sl-card-surface">
+    <h3>Sécurité</h3>
+
+    <div class="sl-settings-row">
+      <div>
+        <span class="sl-settings-row__title">Authentification à deux facteurs (2FA)</span>
+        <span class="sl-settings-row__desc">Ajoutez une couche de sécurité supplémentaire à votre compte via SMS.</span>
+      </div>
+      <mat-slide-toggle [checked]="twoFactorEnabled()" (change)="twoFactorEnabled.set($event.checked)" color="primary"></mat-slide-toggle>
+    </div>
+
+    <button mat-stroked-button class="sl-settings-card__danger">
+      <mat-icon>lock_reset</mat-icon> Changer le mot de passe
+    </button>
+  </div>
+
+  <div class="sl-settings-card sl-card-surface sl-settings-card--danger-zone">
+    <h3>Zone sensible</h3>
+    <p>La désactivation de votre compte masquera vos annonces et suspendra vos accès. Cette action est réversible en contactant le support.</p>
+    <button mat-stroked-button color="warn">Désactiver mon compte</button>
+  </div>
+</div>

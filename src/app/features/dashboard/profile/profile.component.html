@@ -1,0 +1,52 @@
+<div class="sl-page">
+  <div class="sl-page__header">
+    <h1>Mon profil</h1>
+    <p>Gérez vos informations personnelles.</p>
+  </div>
+
+  <div class="sl-profile-card sl-card-surface">
+    <div class="sl-profile-card__avatar-row">
+      <div class="sl-profile-card__avatar">{{ (auth.currentEmail() ?? '?').charAt(0).toUpperCase() }}</div>
+      <div>
+        <h3>{{ auth.currentEmail() }}</h3>
+        <span>Rôle : {{ auth.currentRole() }}</span>
+      </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="save()" class="sl-profile-card__form">
+      <div class="sl-profile-card__row">
+        <mat-form-field appearance="outline">
+          <mat-label>Prénom</mat-label>
+          <input matInput formControlName="firstName" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Nom</mat-label>
+          <input matInput formControlName="lastName" />
+        </mat-form-field>
+      </div>
+
+      <div class="sl-profile-card__row">
+        <mat-form-field appearance="outline">
+          <mat-label>Téléphone</mat-label>
+          <input matInput formControlName="phone" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Ville</mat-label>
+          <input matInput formControlName="city" />
+        </mat-form-field>
+      </div>
+
+      <button mat-flat-button color="primary" type="submit" [disabled]="saving()">
+        {{ saving() ? 'Enregistrement…' : 'Enregistrer les modifications' }}
+      </button>
+    </form>
+  </div>
+
+  <div class="sl-profile-card sl-card-surface sl-profile-card--kyc">
+    <div>
+      <h3><mat-icon>verified_user</mat-icon> Vérification d'identité (KYC)</h3>
+      <p>Soumettez une pièce d'identité pour débloquer la publication d'annonces et les demandes d'audit.</p>
+    </div>
+    <button mat-stroked-button>Soumettre mes documents</button>
+  </div>
+</div>

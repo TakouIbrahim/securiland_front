@@ -1,0 +1,24 @@
+<div class="sl-page">
+  <div class="sl-page__header">
+    <h1>Mes favoris</h1>
+    <p>Les terrains sur lesquels vous avez signalé un intérêt.</p>
+  </div>
+
+  @if (loading()) {
+    <p class="sl-page__loading">Chargement…</p>
+  } @else if (listings().length === 0) {
+    <sl-empty-state
+      icon="favorite_border"
+      title="Aucun favori pour le moment"
+      description="Parcourez les terrains disponibles et signalez votre intérêt pour les retrouver ici."
+      ctaLabel="Découvrir les terrains"
+      ctaLink="/terrains"
+    ></sl-empty-state>
+  } @else {
+    <div class="sl-page__grid">
+      @for (listing of listings(); track listing.id) {
+        <sl-listing-card [listing]="listing" [favorited]="true"></sl-listing-card>
+      }
+    </div>
+  }
+</div>

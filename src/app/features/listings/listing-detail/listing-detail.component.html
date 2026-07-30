@@ -1,0 +1,99 @@
+@if (listing(); as item) {
+  <div class="sl-container sl-detail">
+    <a routerLink="/terrains" class="sl-detail__back"><mat-icon>arrow_back</mat-icon> Retour aux terrains</a>
+
+    <div class="sl-detail__grid">
+      <div class="sl-detail__main">
+        <div class="sl-detail__media">
+          <img [src]="item.imageUrl" [alt]="item.title" />
+          @if (item.certificationStatus === 'CERTIFIEE') {
+            <span class="sl-badge-titre sl-detail__badge"><mat-icon>verified</mat-icon> Titré</span>
+          }
+          <button class="sl-detail__fav" (click)="toggleFavorite()" [class.is-active]="favorited()">
+            <mat-icon>{{ favorited() ? 'favorite' : 'favorite_border' }}</mat-icon>
+          </button>
+        </div>
+
+        <div class="sl-detail__heading">
+          <h1>{{ item.title }}</h1>
+          <div class="sl-detail__location"><mat-icon>place</mat-icon> {{ item.district }}, {{ item.city }}</div>
+        </div>
+
+        <div class="sl-detail__price">{{ formatPrice(item.price) }} FCFA</div>
+
+        <div class="sl-detail__specs">
+          <span><mat-icon>straighten</mat-icon> {{ item.surfaceArea ?? '—' }} m²</span>
+          <span><mat-icon>home_work</mat-icon> {{ item.titleType }}</span>
+          <span><mat-icon>visibility</mat-icon> {{ item.viewCount }} vues</span>
+        </div>
+
+        <p class="sl-detail__description">{{ item.description }}</p>
+
+        <!-- ================= CARTE : verrouillee (visiteur) vs complete (connecte) ================= -->
+        @if (!auth.isAuthenticated()) {
+          <div class="sl-detail__map-locked">
+            <mat-icon>lock</mat-icon>
+            <p>Connectez-vous pour voir la localisation exacte</p>
+          </div>
+          <button mat-flat-button color="primary" class="sl-detail__unlock-btn" (click)="goToLogin()">
+            Se connecter pour voir plus
+          </button>
+        } @else {
+          <div class="sl-detail__map">
+            <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=900&q=60&auto=format&fit=crop" alt="Carte de localisation" />
+            <button class="sl-detail__map-btn">
+              <mat-icon>my_location</mat-icon> Voir sur la carte
+            </button>
+          </div>
+        }
+      </div>
+
+      <!-- ================= Colonne lateral (visible uniquement pour un utilisateur connecte) ================= -->
+      @if (auth.isAuthenticated()) {
+        <aside class="sl-detail__side">
+          <div class="sl-detail__owner">
+            <span class="sl-detail__owner-label">Propriétaire / Agence</span>
+            <div class="sl-detail__owner-row">
+              <div class="sl-detail__owner-avatar"><mat-icon>storefront</mat-icon></div>
+              <div>
+                <div class="sl-detail__owner-name">Immo House <mat-icon class="sl-detail__verified">verified</mat-icon></div>
+                <span class="sl-detail__owner-sub">Agence certifiée SecuriLand</span>
+              </div>
+            </div>
+
+            <span class="sl-detail__owner-label">Téléphone</span>
+            <div class="sl-detail__phone-row">
+              <span>+237 675 123 456</span>
+              <a class="sl-detail__icon-btn sl-detail__icon-btn--whatsapp" href="https://wa.me/237675123456" target="_blank" aria-label="WhatsApp">
+                <mat-icon>chat</mat-icon>
+              </a>
+              <a class="sl-detail__icon-btn" href="tel:+237675123456" aria-label="Appeler">
+                <mat-icon>call</mat-icon>
+              </a>
+            </div>
+
+            <button mat-stroked-button class="sl-detail__contact-btn" (click)="contactSeller()">
+              Contacter le vendeur
+            </button>
+          </div>
+
+          <div class="sl-detail__documents">
+            <span class="sl-detail__owner-label">Documents disponibles</span>
+            @for (doc of documents; track doc.name) {
+              <div class="sl-detail__doc-row">
+                <span><mat-icon class="sl-detail__doc-icon">{{ doc.icon }}</mat-icon> {{ doc.name }}</span>
+                <mat-icon class="sl-detail__doc-download">download</mat-icon>
+              </div>
+            }
+          </div>
+
+          <button mat-flat-button class="sl-btn-gold sl-detail__visit-btn" (click)="reserveVisit()">
+            Réserver une visite
+          </button>
+        </aside>
+      }
+    </div>
+  </div>
+} @else {
+  <div class="sl-detail__loading">Chargement de l'annonce…</div>
+}

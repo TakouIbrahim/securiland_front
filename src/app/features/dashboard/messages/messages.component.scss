@@ -1,0 +1,35 @@
+@import '../dashboard-shared';
+
+.sl-msg-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  font-size: 13.5px;
+  color: var(--sl-ink-soft);
+}
+
+.sl-msg-notice mat-icon {
+  color: var(--sl-green-700);
+}
+
+.sl-msg-compose {
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.sl-msg-compose textarea {
+  width: 100%;
+  border: 1px solid var(--sl-border);
+  border-radius: var(--sl-radius-sm);
+  padding: 12px;
+  font-family: var(--sl-font-body);
+  font-size: 14px;
+  resize: vertical;
+  margin-bottom: 12px;
+}
+
+.sl-msg-compose__send {
+  padding: 10px 22px;
+}

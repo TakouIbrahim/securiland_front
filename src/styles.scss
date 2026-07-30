@@ -1,0 +1,267 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// ============================================================
+// SECURILAND — Design tokens
+// Palette extraite de la maquette : vert forêt profond (identité,
+// sidebar, CTA principaux) + or/moutarde (accent "premium", labels
+// TITRÉ, CTA de publication) sur fond ivoire.
+// ============================================================
+
+$sl-green-palette: (
+  50: #eaf3ee,
+  100: #cbe3d6,
+  200: #a9d1bc,
+  300: #86bfa1,
+  400: #6bb18d,
+  500: #4fa279,
+  600: #398a64,
+  700: #1e5c46,
+  800: #17492f,
+  900: #0f3323,
+  A100: #8af5c2,
+  A200: #57eea8,
+  A400: #24e68e,
+  A700: #10cc79,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(0, 0, 0, 0.87),
+    A200: rgba(0, 0, 0, 0.87),
+    A400: rgba(0, 0, 0, 0.87),
+    A700: white,
+  ),
+);
+
+$sl-gold-palette: (
+  50: #faf5ea,
+  100: #f1e4c8,
+  200: #e7d2a3,
+  300: #ddc07d,
+  400: #d5b261,
+  500: #cda446,
+  600: #bc9540,
+  700: #a9843a,
+  800: #967332,
+  900: #745424,
+  A100: #ffe9b3,
+  A200: #ffd97d,
+  A400: #ffc947,
+  A700: #ffbe2e,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: rgba(0, 0, 0, 0.87),
+    500: rgba(0, 0, 0, 0.87),
+    600: rgba(0, 0, 0, 0.87),
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(0, 0, 0, 0.87),
+    A200: rgba(0, 0, 0, 0.87),
+    A400: rgba(0, 0, 0, 0.87),
+    A700: rgba(0, 0, 0, 0.87),
+  ),
+);
+
+$sl-primary: mat.define-palette($sl-green-palette, 700, 500, 900);
+$sl-accent: mat.define-palette($sl-gold-palette, 500, 300, 700);
+$sl-warn: mat.define-palette(mat.$red-palette);
+
+$sl-typography: mat.define-typography-config(
+  $font-family: 'Inter, "Helvetica Neue", sans-serif',
+);
+
+$sl-theme: mat.define-light-theme((
+  color: (
+    primary: $sl-primary,
+    accent: $sl-accent,
+    warn: $sl-warn,
+  ),
+  typography: $sl-typography,
+  density: 0,
+));
+
+@include mat.all-component-themes($sl-theme);
+
+// ============================================================
+// CSS custom properties (utilisées directement dans les composants)
+// ============================================================
+:root {
+  --sl-green-900: #0f3323;
+  --sl-green-800: #17492f;
+  --sl-green-700: #1e5c46;
+  --sl-green-600: #398a64;
+  --sl-green-500: #4fa279;
+  --sl-green-100: #cbe3d6;
+  --sl-green-50: #eaf3ee;
+
+  --sl-gold-700: #a9843a;
+  --sl-gold-600: #bc9540;
+  --sl-gold-500: #cda446;
+  --sl-gold-300: #ddc07d;
+  --sl-gold-100: #f1e4c8;
+
+  --sl-ink: #16241d;
+  --sl-ink-soft: #4b5a52;
+  --sl-gray-500: #6b7a72;
+  --sl-gray-300: #c9d2cc;
+  --sl-border: #e4e2da;
+  --sl-bg: #f7f6f2;
+  --sl-surface: #ffffff;
+  --sl-cream: #fbf9f4;
+
+  --sl-radius-sm: 8px;
+  --sl-radius-md: 14px;
+  --sl-radius-lg: 20px;
+  --sl-shadow-sm: 0 1px 2px rgba(15, 51, 35, 0.06), 0 1px 1px rgba(15, 51, 35, 0.04);
+  --sl-shadow-md: 0 8px 24px rgba(15, 51, 35, 0.10);
+  --sl-shadow-lg: 0 20px 48px rgba(15, 51, 35, 0.16);
+
+  --sl-font-display: 'Poppins', 'Inter', sans-serif;
+  --sl-font-body: 'Inter', 'Helvetica Neue', sans-serif;
+}
+
+// ============================================================
+// Reset & base
+// ============================================================
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sl-font-body);
+  color: var(--sl-ink);
+  background: var(--sl-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--sl-font-display);
+  font-weight: 600;
+  color: var(--sl-ink);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--sl-font-body);
+}
+
+::selection {
+  background: var(--sl-gold-300);
+  color: var(--sl-ink);
+}
+
+// Focus visible — accessibilité clavier
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--sl-green-600);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+// ============================================================
+// Utilitaires de mise en page partagés
+// ============================================================
+.sl-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.sl-section {
+  padding: 64px 0;
+}
+
+.sl-btn-gold {
+  background: linear-gradient(180deg, var(--sl-gold-500), var(--sl-gold-600));
+  color: var(--sl-ink) !important;
+  font-weight: 600;
+  border-radius: var(--sl-radius-sm);
+  box-shadow: var(--sl-shadow-sm);
+}
+
+.sl-btn-gold:hover {
+  background: linear-gradient(180deg, var(--sl-gold-600), var(--sl-gold-700));
+}
+
+.sl-badge-titre {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--sl-gold-500);
+  color: var(--sl-ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.sl-card-surface {
+  background: var(--sl-surface);
+  border-radius: var(--sl-radius-md);
+  border: 1px solid var(--sl-border);
+  box-shadow: var(--sl-shadow-sm);
+}
+
+// Material overrides ciblés pour coller au design (form fields en "outline" arrondi)
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.mat-mdc-raised-button.mat-primary {
+  --mdc-protected-button-container-color: var(--sl-green-700);
+}
+
+.mat-mdc-outlined-button {
+  border-radius: var(--sl-radius-sm) !important;
+}
+
+.mat-mdc-raised-button, .mat-mdc-unelevated-button {
+  border-radius: var(--sl-radius-sm) !important;
+  font-weight: 600 !important;
+}
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: var(--sl-ink);
+}
+
+@media (max-width: 768px) {
+  .sl-section {
+    padding: 40px 0;
+  }
+  .sl-container {
+    padding: 0 16px;
+  }
+}

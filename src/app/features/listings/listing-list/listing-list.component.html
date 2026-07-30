@@ -1,0 +1,58 @@
+<div class="sl-container sl-listpage">
+  <div class="sl-listpage__header">
+    <h1>Tous les terrains</h1>
+    <p>Parcourez l'ensemble des terrains disponibles, vérifiés et certifiés par SecuriLand.</p>
+  </div>
+
+  <div class="sl-listpage__grid">
+    <aside class="sl-listpage__filters">
+      <h3>Filtrer</h3>
+
+      <label class="sl-listpage__label">Ville ou quartier</label>
+      <input type="text" [(ngModel)]="city" placeholder="Ex : Douala" class="sl-listpage__input" />
+
+      <label class="sl-listpage__label">Prix minimum (FCFA)</label>
+      <input type="number" [(ngModel)]="minPrice" placeholder="0" class="sl-listpage__input" />
+
+      <label class="sl-listpage__label">Prix maximum (FCFA)</label>
+      <input type="number" [(ngModel)]="maxPrice" placeholder="Aucune limite" class="sl-listpage__input" />
+
+      <mat-checkbox [(ngModel)]="certifiedOnly" color="primary" class="sl-listpage__checkbox">
+        Uniquement les terrains certifiés
+      </mat-checkbox>
+
+      <button mat-flat-button color="primary" class="sl-listpage__apply" (click)="applyFilters()">
+        Appliquer
+      </button>
+      <button mat-button (click)="resetFilters()" class="sl-listpage__reset">Réinitialiser</button>
+    </aside>
+
+    <div class="sl-listpage__results">
+      @if (loading()) {
+        <div class="sl-listpage__loading">Chargement des terrains…</div>
+      } @else if (listings().length === 0) {
+        <sl-empty-state
+          icon="search_off"
+          title="Aucun terrain ne correspond à votre recherche"
+          description="Essayez d'élargir vos critères (ville, prix) ou retirez le filtre de certification."
+        ></sl-empty-state>
+      } @else {
+        <div class="sl-grid-list">
+          @for (listing of listings(); track listing.id) {
+            <sl-listing-card [listing]="listing"></sl-listing-card>
+          }
+        </div>
+
+        <div class="sl-listpage__pagination">
+          <button mat-stroked-button [disabled]="page() === 0" (click)="prevPage()">
+            <mat-icon>chevron_left</mat-icon> Précédent
+          </button>
+          <span>Page {{ page() + 1 }} / {{ totalPages() }}</span>
+          <button mat-stroked-button [disabled]="page() + 1 >= totalPages()" (click)="nextPage()">
+            Suivant <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+.sl-footer {
+  background: var(--sl-green-900);
+  color: rgba(255, 255, 255, 0.78);
+  padding: 56px 0 0;
+}
+
+.sl-footer__grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+
+.sl-footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sl-font-display);
+  font-size: 19px;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.sl-footer__logo strong {
+  color: var(--sl-gold-400, var(--sl-gold-500));
+}
+
+.sl-footer__brand p {
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 320px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.sl-footer__social {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.sl-footer__social a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.sl-footer__social a:hover {
+  background: var(--sl-gold-500);
+  color: var(--sl-green-900);
+}
+
+.sl-footer__col h4 {
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+}
+
+.sl-footer__col a,
+.sl-footer__col p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 12px;
+}
+
+.sl-footer__col mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--sl-gold-400, var(--sl-gold-500));
+}
+
+.sl-footer__col a:hover {
+  color: #fff;
+}
+
+.sl-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.sl-footer__legal {
+  display: flex;
+  gap: 20px;
+}
+
+.sl-footer__legal a:hover {
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .sl-footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .sl-footer__grid {
+    grid-template-columns: 1fr;
+  }
+  .sl-footer__bottom {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
