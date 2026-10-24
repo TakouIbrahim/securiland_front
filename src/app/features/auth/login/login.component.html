@@ -6,6 +6,9 @@
     </a>
 
     <h1>Content de vous revoir</h1>
+    <div class="alert alert-success">
+    {{ errorMessage() }}
+  </div>
     <p class="sl-auth__subtitle">Connectez-vous pour accéder à votre espace SecuriLand.</p>
 
     <form [formGroup]="form" (ngSubmit)="submit()" class="sl-auth__form">

@@ -55,7 +55,11 @@ export class RegisterComponent {
     this.auth.register(payload as any).subscribe({
       next: () => {
         this.submitting.set(false);
-        this.router.navigateByUrl('/app/tableau-de-bord');
+        this.router.navigateByUrl('/connexion', {
+          state: {
+        message: 'Votre compte a été créé. Veuillez vérifier votre adresse e-mail pour l’activer.',
+      },
+        });
       },
       error: (err) => {
         this.submitting.set(false);

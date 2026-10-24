@@ -35,7 +35,12 @@ export class LoginComponent {
     password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {}
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {
+    const navigation = this.router.getCurrentNavigation();
+    console.log('ici je suis')
+
+        this.errorMessage.set(navigation?.extras?.state?.['message'] ?? '');
+  }
 
   submit(): void {
     if (this.form.invalid) {

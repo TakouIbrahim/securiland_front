@@ -43,8 +43,8 @@ export class AuthService {
 
   register(payload: RegisterPayload): Observable<ApiResponse<AuthResponse>> {
     return this.http
-      .post<ApiResponse<AuthResponse>>(`${API_BASE_URL}/auth/register`, payload)
-      .pipe(tap((res) => this.persistSession(res.data)));
+      .post<ApiResponse<AuthResponse>>(`${API_BASE_URL}/auth/register`, payload);
+      // .pipe(tap((res) => this.persistSession(res.data)));
   }
 
   login(payload: LoginPayload): Observable<ApiResponse<AuthResponse>> {
